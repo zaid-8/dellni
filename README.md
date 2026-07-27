@@ -63,8 +63,6 @@ This MVP uses a structured JSON dataset for Amman BRT / Amman Bus-style routes, 
 - Geocoding fallback: OpenStreetMap/Nominatim for unknown landmarks only.
 
 
-## Route 99 landmark correction
-This build expands BRT Route 99 with the major published landmarks used by riders between Sweileh and Jordan Museum: University of Jordan, Sports City, King Abdullah Gardens, Wadi Saqra, Arab Medical Center, Amideast, Ras Al Ain, GAM, and Jordan Museum. It also adds demo aliases for 42 Amman and Al Hussein Cultural Center so queries like "من صويلح إلى 42 عمان" and "من الجامعة الأردنية إلى مركز الحسين الثقافي" return a direct Route 99 journey when appropriate.
 
 ## Street-following map lines
 The frontend now asks OpenStreetMap/OSRM to draw bus legs along roads instead of drawing only straight lines between stop coordinates. If OSRM is unavailable, the app falls back to the local route geometry.
