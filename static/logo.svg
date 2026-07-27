@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Dellni logo">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="48" x2="440" y2="464" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC"/>
+      <stop offset="0.45" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="road" x1="138" y1="384" x2="382" y2="132" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDE68A"/>
+      <stop offset="0.55" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#020617" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <rect x="42" y="42" width="428" height="428" rx="116" fill="url(#bg)"/>
+  <path d="M132 374c53-7 76-31 91-76 16-47 45-76 103-87 17-3 35-4 54-4" fill="none" stroke="url(#road)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+  <path d="M132 374c82 4 161 6 248 0" fill="none" stroke="#FDE68A" stroke-width="12" stroke-linecap="round" opacity="0.92"/>
+  <circle cx="132" cy="374" r="29" fill="#FFFFFF" filter="url(#shadow)"/>
+  <circle cx="132" cy="374" r="12" fill="#2563EB"/>
+  <path d="M352 86c-59 0-106 45-106 101 0 75 106 177 106 177s106-102 106-177c0-56-47-101-106-101z" fill="#FFFFFF" filter="url(#shadow)"/>
+  <circle cx="352" cy="187" r="43" fill="#2563EB"/>
+  <path d="M296 298h112" stroke="#0F172A" stroke-width="14" stroke-linecap="round" opacity="0.14"/>
+  <rect x="112" y="121" width="160" height="154" rx="42" fill="#FFFFFF" filter="url(#shadow)"/>
+  <path d="M148 158h67c41 0 69 25 69 61 0 37-28 62-69 62h-67V158zm46 37v49h17c16 0 27-10 27-25 0-14-11-24-27-24h-17z" fill="#0F172A" opacity="0.88"/>
+  <text x="256" y="440" text-anchor="middle" font-family="Segoe UI, Tahoma, Arial, sans-serif" font-size="54" font-weight="900" fill="#FFFFFF">دلني</text>
+</svg>

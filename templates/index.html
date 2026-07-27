@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dellni | دلني</title>
+  <meta name="description" content="دلني: مخطط رحلات ذكي للباص السريع وباص عمّان مع خريطة ومساعد صوتي.">
+  <link rel="icon" href="{{ url_for('static', filename='logo-dellni-mark.png') }}" type="image/png">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="topbar glass-panel">
+    <a class="brand" href="#" aria-label="دلني">
+      <img src="{{ url_for('static', filename='logo-dellni.png') }}" alt="شعار Dellni دلني" class="brand-logo brand-logo-full">
+      <span class="brand-copy">
+        <strong data-i18n="brand">دلني</strong>
+        <small data-i18n="tagline">أوفر طريق بالباص داخل عمّان</small>
+      </span>
+    </a>
+    <div class="top-actions">
+      <span id="systemStatus" class="status-pill" data-i18n="loading">جاري تحميل الداتا...</span>
+      <button id="langToggle" class="ghost-btn" type="button">English</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="map-stage" aria-label="الخريطة الرئيسية">
+      <div id="map" role="application" aria-label="خريطة دلني"></div>
+
+      <aside class="location-card glass-panel" aria-live="polite">
+        <span class="soft-label" data-i18n="locationQuality">دقة الموقع الحالي</span>
+        <strong id="accuracyText" data-i18n="notDetected">لم يتم التحديد بعد</strong>
+        <small id="nearestStopText" data-i18n="nearestPending">أقرب محطة ستظهر بعد تحديد موقعك</small>
+      </aside>
+
+      <section class="bottom-sheet glass-panel" aria-label="تخطيط الرحلة">
+        <div class="sheet-handle"></div>
+        <div class="sheet-title-row">
+          <div>
+            <p class="eyebrow" data-i18n="savingOnly">وضع التوفير فقط</p>
+            <h1 data-i18n="mainTitle">وين بدك تروح؟</h1>
+          </div>
+          <span class="mode-badge" data-i18n="savingBadge">أقل تكلفة</span>
+        </div>
+
+        <div class="field-stack">
+          <label class="route-field">
+            <span data-i18n="from">من وين؟</span>
+            <input id="origin" list="locationsList" autocomplete="off" placeholder="مثال: صويلح أو موقعي الحالي">
+          </label>
+          <label class="route-field destination-field">
+            <span data-i18n="to">لوين؟</span>
+            <input id="destination" list="locationsList" autocomplete="off" placeholder="مثال: العبدلي أو الزرقاء">
+          </label>
+          <input id="departureTime" type="datetime-local" class="time-input" aria-label="وقت الانطلاق">
+          <datalist id="locationsList"></datalist>
+        </div>
+
+        <div class="primary-actions" aria-label="الأزرار الرئيسية">
+          <button id="aiBtn" type="button" class="action-btn ai-action"><span>🎙️</span><b data-i18n="aiButton">دلني بالصوت</b></button>
+          <button id="useLocationBtn" type="button" class="action-btn"><span>📍</span><b data-i18n="myLocation">موقعي الحالي</b></button>
+          <button id="pickOriginBtn" type="button" class="action-btn"><span>🟢</span><b data-i18n="pickStart">حدد البداية</b></button>
+          <button id="pickDestinationBtn" type="button" class="action-btn"><span>🏁</span><b data-i18n="pickEnd">حدد الوجهة</b></button>
+        </div>
+
+        <p id="pickerHint" class="hint" data-i18n="hint">اكتب المكان أو اضغط على الخريطة بعد اختيار البداية أو الوجهة. عندما تحدد النقطتين سيحسب دلني أوفر طريق تلقائيا.</p>
+      </section>
+    </section>
+
+    <section id="resultPanel" class="result-panel hidden" aria-live="polite">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="routeResult">نتيجة الرحلة</p>
+        <h2 data-i18n="savingRoute">أوفر مسار مقترح</h2>
+      </div>
+      <div id="assistantCard" class="assistant-card"></div>
+      <div id="summaryCards" class="summary-grid"></div>
+      <div id="accessBox" class="access-grid"></div>
+      <div id="nearestBox" class="nearest-grid"></div>
+      <div id="stepsBox" class="steps-card"></div>
+      <div class="route-actions">
+        <button id="alertBtn" class="success-btn" type="button" disabled data-i18n="enableAlert">فعّل تنبيه النزول عند 250 متر</button>
+      </div>
+      <form id="tripFeedback" class="feedback-card hidden">
+        <h3 data-i18n="rateTrip">قيّم الرحلة بعد ما تخلص</h3>
+        <div class="rating-row" role="radiogroup" aria-label="تقييم الرحلة">
+          <label><input type="radio" name="rating" value="1"><span>1</span></label>
+          <label><input type="radio" name="rating" value="2"><span>2</span></label>
+          <label><input type="radio" name="rating" value="3"><span>3</span></label>
+          <label><input type="radio" name="rating" value="4"><span>4</span></label>
+          <label><input type="radio" name="rating" value="5" checked><span>5</span></label>
+        </div>
+        <textarea id="tripNote" rows="2" placeholder="ملاحظتك اختيارية"></textarea>
+        <button class="primary-submit" type="submit" data-i18n="sendRating">إرسال التقييم</button>
+        <p id="feedbackStatus" class="hint"></p>
+      </form>
+    </section>
+
+    <section class="area-mode-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="generalArea">اختيار المنطقة العامة</p>
+        <h2 data-i18n="areaTitle">مش فارق الشارع بالزبط؟</h2>
+        <p data-i18n="areaSubtitle">اكتب المنطقة اللي أنت فيها والمنطقة اللي بدك توصلها، ودلني يختار أقرب محطات ويوفر عليك.</p>
+      </div>
+      <form id="areaForm" class="area-form glass-panel">
+        <label><span data-i18n="currentArea">منطقة البداية</span><input id="areaOrigin" list="locationsList" placeholder="مثال: خلدا"></label>
+        <label><span data-i18n="targetArea">منطقة الوجهة</span><input id="areaDestination" list="locationsList" placeholder="مثال: العبدلي"></label>
+        <button class="primary-submit" type="submit" data-i18n="areaSubmit">احسب أوفر طريق بالمنطقة</button>
+      </form>
+    </section>
+
+    <section class="data-section">
+      <details class="data-details glass-panel">
+        <summary data-i18n="dataSummary">مصادر البيانات وحدود الدقة</summary>
+        <p id="datasetWarning"></p>
+        <div id="dataCards" class="data-cards"></div>
+        <ul id="dataSourceList" class="source-list"></ul>
+      </details>
+    </section>
+  </main>
+
+  <dialog id="aiDialog" class="ai-dialog">
+    <section class="ai-box" aria-label="شات دلني الذكي">
+      <button id="closeAiDialog" class="dialog-close" type="button" aria-label="إغلاق">×</button>
+      <header class="ai-chat-head">
+        <img src="{{ url_for('static', filename='logo-dellni.png') }}" alt="Dellni دلني" class="dialog-logo dialog-logo-full">
+        <div>
+          <h2 data-i18n="chatTitle">شات دلني الذكي</h2>
+          <p data-i18n="chatHelp">احكي أو اكتب رحلتك. دلني يرحب فيك، يفهم طلبك، ثم يحسب أوفر مسار من الداتا.</p>
+        </div>
+      </header>
+      <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+      <div class="chat-compose">
+        <button id="startVoiceBtn" class="mic-btn" type="button" aria-label="تسجيل صوتي">🎙️</button>
+        <textarea id="chatInput" rows="2" placeholder="احكي مثلاً: من دوار المدينة إلى صويلح الساعة ٨"></textarea>
+        <button id="sendChatBtn" class="primary-submit" type="button" data-i18n="sendChat">إرسال</button>
+      </div>
+      <p id="voiceStatus" class="hint"></p>
+    </section>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
