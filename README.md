@@ -2,16 +2,6 @@
 
 Dellni is a map-first public-transport route planner for Greater Amman. The user can choose their current location, pick a start and destination on the map, type a place name, or speak to the AI chat. The backend returns the lowest-cost public-transport route, the nearest suitable boarding station, walking distance, estimated private-car/drop-off time to the station, bus legs, fares, and a 250 m exit alert.
 
-## What's new in this build
-
-- Uses the provided Dellni logo image throughout the site.
-- Re-themed the whole UI around the logo palette: deep purple, copper, gold, cream, and soft white.
-- Added OpenStreetMap/Nominatim fallback geocoding for landmarks that are not in the local JSON list.
-- Added curated offline aliases for common landmarks such as `42 عمان`, `42 Amman`, Taj Mall, Abdali Mall, Mecca Mall, and King Hussein Park.
-- Fixed Arabic parsing so a place containing `عمان` is not mistaken for the slang preposition `ع`.
-- The AI chat now supports unknown landmarks by preserving the user's raw place name, then letting the backend map-search layer resolve coordinates before the deterministic router runs.
-- Routing, fares, station selection, walking time, bus trips, and map legs are still calculated by the backend and JSON data, not by the AI.
-
 ## Run on Windows
 
 ```powershell
@@ -28,7 +18,7 @@ Open:
 http://127.0.0.1:5000
 ```
 
-## Optional OpenAI AI layer
+## OpenAI AI layer
 
 The site works without an API key using local parsing and deterministic text templates. To enable the OpenAI language layer:
 
