@@ -46,6 +46,33 @@ let osrmCache = new Map();
 let chatStarted = false;
 let chatHistory = [];
 
+function setMobileViewportHeight() {
+  const visualHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const height = Math.max(520, Math.round(visualHeight || window.innerHeight || 720));
+  document.documentElement.style.setProperty('--app-height', `${height}px`);
+}
+function safeInvalidateMap() {
+  if (!map) return;
+  window.requestAnimationFrame(() => {
+    try { map.invalidateSize({animate:false}); } catch (_) {}
+  });
+}
+function isCompactViewport() {
+  return window.matchMedia('(max-width: 900px)').matches;
+}
+function fitMapToPoints(points, options={}) {
+  if (!map || !points || !points.length) return;
+  const bounds = L.latLngBounds(points);
+  const compact = isCompactViewport();
+  const paddingTopLeft = compact ? [34, 96] : [90, 90];
+  const paddingBottomRight = compact ? [34, Math.min(380, Math.round(window.innerHeight * 0.52))] : [90, 90];
+  try {
+    if (points.length === 1) map.setView(points[0], options.zoom || 16);
+    else map.fitBounds(bounds, {paddingTopLeft, paddingBottomRight, maxZoom: options.maxZoom || 15});
+  } catch (_) {}
+  safeInvalidateMap();
+}
+
 function t(key) { return i18n[lang][key] || i18n.ar[key] || key; }
 function esc(v) { return String(v ?? '').replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function fmtMoney(v) { return `${Number(v || 0).toFixed(2)} ${t('jd')}`; }
@@ -89,7 +116,8 @@ function setBusy(isBusy) {
 }
 
 function initMap() {
-  map = L.map('map', {scrollWheelZoom: true, zoomControl: false}).setView([31.9632, 35.9304], 12);
+  setMobileViewportHeight();
+  map = L.map('map', {scrollWheelZoom: true, zoomControl: false, tap: true}).setView([31.9632, 35.9304], 12);
   L.control.zoom({position: 'bottomleft'}).addTo(map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'}).addTo(map);
   routeLayer = L.layerGroup().addTo(map);
@@ -97,6 +125,11 @@ function initMap() {
   pickerLayer = L.layerGroup().addTo(map);
   accuracyLayer = L.layerGroup().addTo(map);
   map.on('click', (e) => handleMapClick(e.latlng));
+  map.whenReady(() => {
+    safeInvalidateMap();
+    setTimeout(safeInvalidateMap, 250);
+    setTimeout(safeInvalidateMap, 900);
+  });
 }
 
 function setPicker(which) {
@@ -164,8 +197,7 @@ function drawPickers() {
     });
     bounds.push([destinationCoords.lat, destinationCoords.lon]);
   }
-  if (bounds.length === 1) map.setView(bounds[0], 16);
-  if (bounds.length > 1) map.fitBounds(L.latLngBounds(bounds), {padding:[90,90], maxZoom:15});
+  if (bounds.length) fitMapToPoints(bounds, {zoom:16, maxZoom:15});
 }
 
 function usePreciseLocation() {
@@ -270,7 +302,8 @@ function renderAssistantResult(data, scrollToResult=true) {
     $('summaryCards').innerHTML = '';
     $('stepsBox').innerHTML = '';
     $('tripFeedback').classList.add('hidden');
-    if (scrollToResult) $('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
+    safeInvalidateMap();
+    if (scrollToResult && !isCompactViewport()) $('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
     return;
   }
   $('assistantCard').textContent = data.assistant_text || '';
@@ -282,7 +315,8 @@ function renderAssistantResult(data, scrollToResult=true) {
   $('tripFeedback').classList.remove('hidden');
   $('alertBtn').disabled = !data.proximity_target;
   $('alertBtn').textContent = t('alertOff');
-  if (scrollToResult) $('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  safeInvalidateMap();
+  if (scrollToResult && !isCompactViewport()) $('resultPanel').scrollIntoView({behavior:'smooth', block:'start'});
 }
 function renderSummary(data) {
   const cards = [
@@ -397,8 +431,9 @@ async function renderMap(data) {
       points.push([marker.lat, marker.lon]);
     }
   }
-  if (points.length) map.fitBounds(L.latLngBounds(points), {padding:[90,90], maxZoom:15});
+  if (points.length) fitMapToPoints(points, {maxZoom:15});
 }
+
 async function getRoadGeometry(points, profile='driving') {
   const clean = (points || []).filter((p) => Array.isArray(p) && p.length === 2 && Number.isFinite(Number(p[0])) && Number.isFinite(Number(p[1])));
   if (clean.length < 2) return clean;
@@ -655,10 +690,20 @@ function wireEvents() {
   });
 }
 
+window.addEventListener('resize', () => { setMobileViewportHeight(); safeInvalidateMap(); });
+window.addEventListener('orientationchange', () => { setMobileViewportHeight(); setTimeout(safeInvalidateMap, 250); setTimeout(safeInvalidateMap, 900); });
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => { setMobileViewportHeight(); safeInvalidateMap(); });
+  window.visualViewport.addEventListener('scroll', () => { setMobileViewportHeight(); safeInvalidateMap(); });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  setMobileViewportHeight();
   initMap();
   wireEvents();
   setupVoice();
   applyLanguage();
   loadBootData();
+  setTimeout(safeInvalidateMap, 300);
+  setTimeout(safeInvalidateMap, 1200);
 });
