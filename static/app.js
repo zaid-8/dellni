@@ -4,7 +4,7 @@ const i18n = {
   ar: {
     brand: 'دلني', tagline: 'أوفر طريق بالباص داخل عمّان', loading: 'جاري تحميل الداتا...',
     locationQuality: 'دقة الموقع الحالي', notDetected: 'لم يتم التحديد بعد', nearestPending: 'أقرب محطة ستظهر بعد تحديد موقعك',
-    savingOnly: 'وضع التوفير فقط', mainTitle: 'وين بدك تروح؟', savingBadge: 'أقل تكلفة', from: 'من وين؟', to: 'لوين؟',
+    savingOnly: '', mainTitle: 'وين بدك تروح؟', savingBadge: 'أقل تكلفة', from: 'من وين؟', to: 'لوين؟',
     aiButton: 'اسأل دلني', myLocation: 'موقعي الحالي', pickStart: 'حدد البداية', pickEnd: 'حدد الوجهة',
     hint: 'اكتب المكان أو اضغط على الخريطة بعد اختيار البداية أو الوجهة. عندما تحدد النقطتين سيحسب دلني أوفر طريق تلقائيا.',
     routeResult: 'نتيجة الرحلة', savingRoute: 'أوفر مسار مقترح', enableAlert: 'فعّل تنبيه النزول عند 250 متر',
@@ -17,7 +17,7 @@ const i18n = {
   en: {
     brand: 'Dellni', tagline: 'Lowest-cost bus routing in Amman', loading: 'Loading data...',
     locationQuality: 'Current location accuracy', notDetected: 'Not detected yet', nearestPending: 'Nearest stop appears after location is set',
-    savingOnly: 'Savings mode only', mainTitle: 'Where are you going?', savingBadge: 'Lowest cost', from: 'Start', to: 'Destination',
+    savingOnly: '', mainTitle: 'Where are you going?', savingBadge: 'Lowest cost', from: 'Start', to: 'Destination',
     aiButton: 'Ask Dellni', myLocation: 'My location', pickStart: 'Pick start', pickEnd: 'Pick destination',
     hint: 'Type a place or press the map after choosing start or destination. Dellni calculates automatically when both points are set.',
     routeResult: 'Trip result', savingRoute: 'Lowest-cost route', enableAlert: 'Enable 250 m exit alert',
@@ -337,13 +337,23 @@ function renderAccess(data) {
   if (!access) { box.innerHTML = ''; return; }
   const carAlt = access.car_to_station_then_bus || data.car_access_to_station_estimate || {};
   const firstBus = (data.legs || []).find((leg) => leg.mode === 'bus') || {};
+  const longAccess = Number(access.distance_m || 0) > 1000 || access.recommended_access_mode === 'car_recommended';
+  const startName = data.origin?.name || (lang === 'ar' ? 'موقعك الحالي' : 'your location');
+  const accessAdvice = lang === 'ar'
+    ? (longAccess
+        ? `المسافة التي ستمشيها إلى المحطة ${fmtMeters(access.distance_m)}، وهذا أكثر من كيلو. بنصحك تروح بسيارة من ${esc(startName)} إلى ${esc(access.name)}. وقت السيارة التقريبي ${fmtMinutes(access.car_minutes)}.`
+        : `المحطة قريبة: ${fmtMeters(access.distance_m)} فقط، يعني كيلو أو أقل. الأفضل تمشي إلى ${esc(access.name)} عشان توفر.`)
+    : (longAccess
+        ? `The walk to the station is ${fmtMeters(access.distance_m)}, more than 1 km. Consider going by car/drop-off from ${esc(startName)} to ${esc(access.name)}; estimated car time is ${fmtMinutes(access.car_minutes)}.`
+        : `The station is ${fmtMeters(access.distance_m)} away, 1 km or less. Walking to ${esc(access.name)} is recommended to save cost.`);
   box.innerHTML = `
-    <article class="access-card primary-access">
-      <div class="access-icon">🚶</div>
+    <article class="access-card primary-access ${longAccess ? 'access-warning' : 'access-good'}">
+      <div class="access-icon">${longAccess ? '🚗' : '🚶'}</div>
       <div>
-        <b>${t('walkAccess')}</b>
+        <b>${longAccess ? t('carAccess') : t('walkAccess')}</b>
         <strong>${esc(access.name)}</strong>
-        <p>${fmtMeters(access.distance_m)} · ${fmtMinutes(access.walk_minutes)} ${t('walk')}</p>
+        <p>${fmtMeters(access.distance_m)} · ${fmtMinutes(access.walk_minutes)} ${t('walk')} · ${fmtMinutes(access.car_minutes)} ${t('car')}</p>
+        <small>${accessAdvice}</small>
       </div>
     </article>
     <article class="access-card car-access">
@@ -351,7 +361,7 @@ function renderAccess(data) {
       <div>
         <b>${t('carAccess')}</b>
         <strong>${fmtMinutes(access.car_minutes)} ${t('car')}</strong>
-        <p>${fmtMeters(access.car_distance_m || access.distance_m)} ${lang === 'ar' ? 'إلى نفس المحطة' : 'to the same station'}</p>
+        <p>${fmtMeters(access.car_distance_m || access.distance_m)} ${lang === 'ar' ? 'من موقعك إلى المحطة' : 'from your location to the station'}</p>
         ${carAlt.estimated_total_minutes_if_car_to_station ? `<small>${t('fullCarAccess')}: ${fmtMinutes(carAlt.estimated_total_minutes_if_car_to_station)} · ${fmtMoney(carAlt.public_transport_fare_jd || data.fare_jd)}</small>` : ''}
       </div>
     </article>
@@ -392,7 +402,7 @@ function renderSteps(data) {
       : `${esc(leg.from_name)} ← ${esc(leg.to_name)} · ${fmtMinutes(leg.duration_minutes)} ${t('walk')}${leg.car_minutes ? ` · ${fmtMinutes(leg.car_minutes)} ${t('car')}` : ''} · ${fmtMeters(leg.distance_m || 0)}`;
     const stops = leg.mode === 'bus' && leg.intermediate_stops && leg.intermediate_stops.length
       ? `<details><summary>${t('passedStops')}</summary><ol class="stop-list">${leg.intermediate_stops.map((s) => `<li>${esc(s.name)} · ⭐ ${esc(s.station_rating || '--')}</li>`).join('')}</ol></details>`
-      : `<small>${esc(leg.is_access_leg ? (lang === 'ar' ? (leg.access_label_ar || t('exactWalk')) : (leg.access_label_en || t('exactWalk'))) : t('exactWalk'))}</small>`;
+      : `<small>${esc((leg.access_label_ar || leg.access_label_en) ? (lang === 'ar' ? (leg.access_label_ar || t('exactWalk')) : (leg.access_label_en || t('exactWalk'))) : t('exactWalk'))}</small>`;
     return `<li class="step-item"><div class="step-head"><div class="step-title"><span class="step-number">${i+1}</span><strong>${esc(legTitle(leg, i+1))}</strong></div></div><div class="step-meta">${meta}</div>${stops}</li>`;
   }).join('')}</ol>`;
   $('stepsBox').innerHTML = html;
@@ -567,6 +577,13 @@ function setupVoice() {
     recognition.start();
   });
 }
+function setAiLoading(isLoading) {
+  const overlay = $('aiLoadingOverlay');
+  if (!overlay) return;
+  overlay.classList.toggle('hidden', !isLoading);
+  overlay.setAttribute('aria-hidden', isLoading ? 'false' : 'true');
+}
+
 function addChatMessage(role, text) {
   const wrap = document.createElement('div');
   wrap.className = `chat-bubble ${role}`;
@@ -596,15 +613,13 @@ async function sendChatMessage() {
   $('voiceStatus').textContent = '';
   addChatMessage('user', message);
   try {
-    addChatMessage('assistant thinking', '...');
+    setAiLoading(true);
     const data = await postJson('/api/ai-chat', {message, language: lang, departure_time: $('departureTime').value, current_route: currentRoute});
-    const thinking = $('chatMessages').querySelector('.thinking:last-child');
-    if (thinking) thinking.remove();
+    setAiLoading(false);
     addChatMessage('assistant', data.assistant_text || 'تم.');
     if (data.route) renderAssistantResult(data.route, false);
   } catch (error) {
-    const thinking = $('chatMessages').querySelector('.thinking:last-child');
-    if (thinking) thinking.remove();
+    setAiLoading(false);
     addChatMessage('assistant', `${t('routeError')}: ${error.message}`);
   }
 }

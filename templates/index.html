@@ -39,7 +39,6 @@
         <div class="sheet-handle"></div>
         <div class="sheet-title-row">
           <div>
-            <p class="eyebrow" data-i18n="savingOnly">وضع التوفير فقط</p>
             <h1 data-i18n="mainTitle">وين بدك تروح؟</h1>
           </div>
           <span class="mode-badge" data-i18n="savingBadge">أقل تكلفة</span>
@@ -130,6 +129,10 @@
           <p data-i18n="chatHelp">احكي أو اكتب رحلتك. دلني يرحب فيك، يفهم طلبك، ثم يحسب أوفر مسار من الداتا.</p>
         </div>
       </header>
+      <div id="aiLoadingOverlay" class="ai-loading-overlay hidden" aria-live="polite" aria-hidden="true">
+        <div class="ai-spinner" role="status" aria-label="دلني يفكر"></div>
+        <strong>دلني يفكر...</strong>
+      </div>
       <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
       <div class="chat-compose">
         <button id="startVoiceBtn" class="mic-btn" type="button" aria-label="تسجيل صوتي">🎙️</button>

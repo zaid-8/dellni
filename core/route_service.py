@@ -19,6 +19,7 @@ from .data_loader import RouteMeta, filter_transit_data_for_routes, load_amman_b
 AMMAN_TZ = get_timezone("Asia/Amman")
 WALKING_SPEED_MPS = 1.25
 WALK_TO_STOP_THRESHOLD_S = 10 * 60
+WALK_TO_STOP_DISTANCE_THRESHOLD_M = 1000.0
 URBAN_CAR_SPEED_MPS = 8.0  # about 29 km/h in city streets, MVP estimate
 CAR_ACCESS_BUFFER_S = 75
 NEAR_ROUTE_ACCESS_RADIUS_M = 850.0
@@ -162,8 +163,7 @@ class DellniRouteService:
             "طارق": "tariq_terminal", "طبربور": "tariq_terminal", "محطة طارق": "tariq_terminal", "tariq": "tariq_terminal", "tabarbour": "tariq_terminal",
             "ماركا": "marka_brt_station", "marka": "marka_brt_station", "الرصيفة": "russeifa", "russeifa": "russeifa",
             "الزرقاء": "zarqa_terminal", "زرقاء": "zarqa_terminal", "zarqa": "zarqa_terminal",
-            "السلط": "salt_city_center", "وسط السلط": "salt_city_center", "salt": "salt_city_center",
-            "جامعة البلقاء": "al_balqa_applied_university", "البلقاء التطبيقية": "al_balqa_applied_university", "balqa": "al_balqa_applied_university",
+            # Salt/Balqa route options were removed from the current submission dataset because they are outside the validated Amman station set.
             "مادبا": "madaba_secondary_school_boys", "madaba": "madaba_secondary_school_boys",
             "مستشفى حمزة": "hamza_hospital_tariq", "مستشفى الأمير حمزة": "hamza_hospital_tariq", "hamza hospital": "hamza_hospital_tariq",
             "خلدا": "khalda_circle", "دوار خلدا": "khalda_circle", "khalda": "khalda_circle",
@@ -246,6 +246,9 @@ class DellniRouteService:
         return custom.get(stop_id, name)
 
     def locations_catalog(self) -> list[dict[str, Any]]:
+        # The datalist shown to users should contain only validated bus/BRT stations.
+        # Generic neighborhoods still work when typed, but they are not suggested as
+        # selectable destinations because the user asked to hide places with no station.
         rows: list[dict[str, Any]] = []
         for stop_id, stop in self.data.stops.items():
             rows.append({
@@ -256,21 +259,6 @@ class DellniRouteService:
                 "lon": stop.lon,
                 "landmark": self.landmarks_ar.get(stop_id, stop.name),
                 "station_rating": getattr(stop, "station_rating", None),
-            })
-        seen: set[tuple[str, float, float]] = set()
-        for loc in self.area_locations.values():
-            key = (loc.name, round(loc.lat, 4), round(loc.lon, 4))
-            if key in seen:
-                continue
-            seen.add(key)
-            rows.append({
-                "stop_id": None,
-                "type": "area",
-                "name": loc.name,
-                "lat": loc.lat,
-                "lon": loc.lon,
-                "landmark": "منطقة عامة؛ دلني سيبحث عن أقرب محطة مناسبة تلقائيا.",
-                "station_rating": None,
             })
         return sorted(rows, key=lambda x: x["name"])
 
@@ -843,8 +831,8 @@ class DellniRouteService:
         dist = haversine_m(origin_point, (stop.lat, stop.lon))
         walk_seconds = int(round(dist / WALKING_SPEED_MPS))
         car_seconds = self._estimate_car_access_seconds(dist)
-        recommend_walk = walk_seconds <= WALK_TO_STOP_THRESHOLD_S
         distance_int = int(round(dist))
+        recommend_walk = distance_int <= WALK_TO_STOP_DISTANCE_THRESHOLD_M
         walk_min = round(walk_seconds / 60.0, 1)
         car_min = round(car_seconds / 60.0, 1)
         return {
@@ -858,12 +846,20 @@ class DellniRouteService:
             "car_seconds": car_seconds,
             "car_minutes": car_min,
             "car_distance_m": distance_int,
-            "recommended_access_mode": "walk" if recommend_walk else "car_or_dropoff_optional",
-            "label_ar": "هذه أقرب محطة مناسبة للمسار. المشي إليها مناسب لأنه أقل من 10 دقائق." if recommend_walk else "هذه أقرب محطة مناسبة للمسار، لكنها أبعد من 10 دقائق مشي؛ لذلك أعرض لك وقت المشي ووقت السيارة للمقارنة.",
-            "label_en": "This is the nearest suitable boarding stop. Walking is suitable because it is under 10 minutes." if recommend_walk else "This is the nearest suitable boarding stop, but it is more than 10 minutes away on foot; walking and car times are shown for comparison.",
-            "walk_option_ar": f"مشي إلى المحطة: {walk_min} دقيقة لمسافة {distance_int} متر.",
+            "recommended_access_mode": "walk" if recommend_walk else "car_recommended",
+            "label_ar": (
+                f"المحطة قريبة: {distance_int} متر، يعني كيلو أو أقل. الأفضل تمشي للمحطة عشان توفر."
+                if recommend_walk else
+                f"المحطة تبعد {distance_int} متر، وهذا أكثر من كيلو. بنصحك تروح بسيارة من موقعك إلى المحطة ثم تكمل بالباص."
+            ),
+            "label_en": (
+                f"The station is {distance_int} m away, 1 km or less. Walking is recommended to save cost."
+                if recommend_walk else
+                f"The station is {distance_int} m away, more than 1 km. Consider going by car/drop-off to the station, then continue by bus."
+            ),
+            "walk_option_ar": f"المسافة إلى المحطة: {distance_int} متر، ووقت المشي حوالي {walk_min} دقيقة.",
             "car_option_ar": f"بالسيارة إلى المحطة: حوالي {car_min} دقيقة لنفس المسافة التقريبية {distance_int} متر.",
-            "walk_option_en": f"Walk to the station: {walk_min} min for about {distance_int} m.",
+            "walk_option_en": f"Distance to the station: {distance_int} m, about {walk_min} min walking.",
             "car_option_en": f"Car/drop-off to the station: about {car_min} min for the same approximate {distance_int} m.",
             "station_rating": getattr(stop, "station_rating", None),
         }
@@ -872,19 +868,29 @@ class DellniRouteService:
         dist = haversine_m((stop.lat, stop.lon), destination_point)
         walk_seconds = int(round(dist / WALKING_SPEED_MPS))
         car_seconds = self._estimate_car_access_seconds(dist)
+        distance_int = int(round(dist))
+        recommend_walk = distance_int <= WALK_TO_STOP_DISTANCE_THRESHOLD_M
         return {
             "stop_id": stop.id,
             "name": stop.name,
             "lat": stop.lat,
             "lon": stop.lon,
-            "distance_m": int(round(dist)),
+            "distance_m": distance_int,
             "walk_seconds": walk_seconds,
             "walk_minutes": round(walk_seconds / 60.0, 1),
             "car_seconds": car_seconds,
             "car_minutes": round(car_seconds / 60.0, 1),
-            "recommended_access_mode": "walk" if walk_seconds <= WALK_TO_STOP_THRESHOLD_S else "car_or_dropoff_optional",
-            "label_ar": "من محطة النزول إلى وجهتك." ,
-            "label_en": "From the exit stop to your destination.",
+            "recommended_access_mode": "walk" if recommend_walk else "car_recommended",
+            "label_ar": (
+                f"من محطة النزول إلى الوجهة: {distance_int} متر، كيلو أو أقل؛ امشِ هذا الجزء لتوفير التكلفة."
+                if recommend_walk else
+                f"من محطة النزول إلى الوجهة: {distance_int} متر، أكثر من كيلو؛ بنصحك تستخدم سيارة لهذا الجزء الأخير."
+            ),
+            "label_en": (
+                f"From the exit stop to the destination: {distance_int} m, 1 km or less; walking is recommended."
+                if recommend_walk else
+                f"From the exit stop to the destination: {distance_int} m, more than 1 km; consider car/drop-off for this final leg."
+            ),
             "station_rating": getattr(stop, "station_rating", None),
         }
 
@@ -1172,8 +1178,24 @@ class DellniRouteService:
         leg["geometry"] = [list(from_coord), list(to_coord)] if from_coord and to_coord else []
         if from_coord and to_coord:
             dist = haversine_m(from_coord, to_coord)
-            leg["distance_m"] = int(round(dist))
-            leg["distance_label"] = f"{int(round(dist))} م"
+            distance_int = int(round(dist))
+            car_seconds = self._estimate_car_access_seconds(dist)
+            recommend_walk = distance_int <= WALK_TO_STOP_DISTANCE_THRESHOLD_M
+            leg["distance_m"] = distance_int
+            leg["distance_label"] = f"{distance_int} م"
+            leg["car_seconds"] = car_seconds
+            leg["car_minutes"] = round(car_seconds / 60.0, 1)
+            leg["recommended_access_mode"] = "walk" if recommend_walk else "car_recommended"
+            leg["access_label_ar"] = (
+                f"المسافة {distance_int} متر، كيلو أو أقل؛ الأفضل تمشي هذا الجزء."
+                if recommend_walk else
+                f"المسافة {distance_int} متر، أكثر من كيلو؛ بنصحك تستخدم سيارة لهذا الجزء."
+            )
+            leg["access_label_en"] = (
+                f"Distance {distance_int} m, 1 km or less; walking is recommended."
+                if recommend_walk else
+                f"Distance {distance_int} m, more than 1 km; consider car/drop-off for this segment."
+            )
             leg["map_hint_ar"] = "سيتم رسم مسار المشي على شوارع OpenStreetMap عند توفر الإنترنت."
             leg["map_hint_en"] = "Walking path is drawn from OpenStreetMap/OSRM when online."
 
@@ -1217,9 +1239,9 @@ class DellniRouteService:
             "stop_id": stop.id, "name": stop.name, "lat": stop.lat, "lon": stop.lon,
             "distance_m": round(dist), "walk_minutes": round(walk_seconds / 60.0, 1),
             "car_minutes": round(car_seconds / 60.0, 1),
-            "recommended_mode": "walk" if walk_seconds <= WALK_TO_STOP_THRESHOLD_S else "long_walk",
-            "label_ar": "امشي للمحطة" if walk_seconds <= WALK_TO_STOP_THRESHOLD_S else "المحطة بعيدة أكثر من 10 دقائق مشي؛ وقت السيارة معروض للمقارنة",
-            "label_en": "Walk to the stop" if walk_seconds <= WALK_TO_STOP_THRESHOLD_S else "Stop is more than 10 minutes away; car time is shown for comparison",
+            "recommended_mode": "walk" if round(dist) <= WALK_TO_STOP_DISTANCE_THRESHOLD_M else "car_recommended",
+            "label_ar": "امشي للمحطة لأنها كيلو أو أقل" if round(dist) <= WALK_TO_STOP_DISTANCE_THRESHOLD_M else "المحطة أبعد من كيلو؛ بنصحك تروح لها بسيارة ثم تكمل بالباص",
+            "label_en": "Walk to the stop because it is 1 km or less" if round(dist) <= WALK_TO_STOP_DISTANCE_THRESHOLD_M else "The stop is more than 1 km away; consider car/drop-off to the stop",
             "station_rating": getattr(stop, "station_rating", None),
         }
 
@@ -1260,11 +1282,11 @@ class DellniRouteService:
         access = result.get("access_to_first_stop")
         if access:
             if access.get("recommended_access_mode") == "walk":
-                lines.append(f"من موقعك، أقرب محطة مناسبة للمسار هي {access.get('name')}. تبعد حوالي {access.get('distance_m')} متر: مشي {access.get('walk_minutes')} دقيقة، وبالسيارة حوالي {access.get('car_minutes')} دقيقة. بما أنها أقل من 10 دقائق، الأفضل تمشي للمحطة عشان توفر.")
+                lines.append(f"من موقعك، أقرب محطة مناسبة للمسار هي {access.get('name')}. المسافة إليها حوالي {access.get('distance_m')} متر، وهذا كيلو أو أقل. وقت المشي تقريباً {access.get('walk_minutes')} دقيقة، فالأفضل تمشي للمحطة عشان توفر.")
             else:
                 car_alt = access.get('car_to_station_then_bus') or {}
-                extra = f" لو معك سيارة ووصلت للمحطة فيها، الرحلة كاملة قد تصير حوالي {car_alt.get('estimated_total_minutes_if_car_to_station')} دقيقة." if car_alt.get('estimated_total_minutes_if_car_to_station') else ""
-                lines.append(f"من موقعك، أقرب محطة مناسبة للمسار هي {access.get('name')}. تبعد حوالي {access.get('distance_m')} متر: إذا مشيت بتوخذ {access.get('walk_minutes')} دقيقة، وإذا رحت بسيارة بتوخذ تقريباً {access.get('car_minutes')} دقيقة.{extra} بعد ما توصل المحطة، ابدأ رحلة الباص من هناك.")
+                extra = f" لو وصلت للمحطة بالسيارة، الرحلة كاملة قد تصير حوالي {car_alt.get('estimated_total_minutes_if_car_to_station')} دقيقة." if car_alt.get('estimated_total_minutes_if_car_to_station') else ""
+                lines.append(f"من موقعك، أقرب محطة مناسبة للمسار هي {access.get('name')}. المسافة التي ستمشيها للمحطة حوالي {access.get('distance_m')} متر، وهذا أكثر من كيلو. بنصحك تروح بسيارة من موقعك إلى {access.get('name')}؛ وقت السيارة التقريبي {access.get('car_minutes')} دقيقة، وبعدها تبدأ رحلة الباص من هناك.{extra}")
         nearest = result.get("nearest", {})
         origin_near = nearest.get("origin")
         if origin_near and not access:
@@ -1275,7 +1297,11 @@ class DellniRouteService:
             elif leg.get("is_access_leg"):
                 lines.append(f"{i}. اذهب من موقعك إلى محطة {leg.get('to_name')}: مشي {leg.get('duration_minutes')} دقيقة، أو سيارة حوالي {leg.get('car_minutes')} دقيقة.")
             else:
-                lines.append(f"{i}. امشِ من {leg.get('from_name')} إلى {leg.get('to_name')} لمسافة {leg.get('distance_m', 0)} متر تقريبا.")
+                walk_m = float(leg.get('distance_m') or 0)
+                if walk_m > WALK_TO_STOP_DISTANCE_THRESHOLD_M:
+                    lines.append(f"{i}. من {leg.get('from_name')} إلى {leg.get('to_name')} المسافة حوالي {leg.get('distance_m', 0)} متر، وهذا أكثر من كيلو؛ بنصحك تستخدم سيارة لهذا الجزء. وقت السيارة التقريبي {leg.get('car_minutes', '--')} دقيقة.")
+                else:
+                    lines.append(f"{i}. امشِ من {leg.get('from_name')} إلى {leg.get('to_name')} لمسافة {leg.get('distance_m', 0)} متر تقريبا لأنها كيلو أو أقل.")
         return "\n".join(lines)
 
     def _assistant_text_en(self, result: dict[str, Any]) -> str:
@@ -1284,14 +1310,21 @@ class DellniRouteService:
         lines = [f"Lowest-cost public-transport route: fare {result.get('fare_jd', 0):.2f} JD, duration {result.get('total_duration_minutes')} min, walking {result.get('walking_distance_m', 0)} m."]
         access = result.get("access_to_first_stop")
         if access:
-            lines.append(f"Nearest suitable boarding stop: {access.get('name')}. It is about {access.get('distance_m')} m away: {access.get('walk_minutes')} min walking or about {access.get('car_minutes')} min by car. Start the bus route from that stop.")
+            if access.get("recommended_access_mode") == "walk":
+                lines.append(f"Nearest suitable boarding stop: {access.get('name')}. It is about {access.get('distance_m')} m away, 1 km or less, so walking is recommended. Walking time is about {access.get('walk_minutes')} min.")
+            else:
+                lines.append(f"Nearest suitable boarding stop: {access.get('name')}. The walk is about {access.get('distance_m')} m, more than 1 km, so consider going by car/drop-off to the station first. Estimated car time is {access.get('car_minutes')} min, then continue by bus.")
         for i, leg in enumerate(result.get("legs", []), 1):
             if leg.get("mode") == "bus":
                 lines.append(f"{i}. Take line {leg.get('route_no')} from {leg.get('from_name')} to {leg.get('to_name')}; fare {float(leg.get('fare_jd', 0)):.2f} JD.")
             elif leg.get("is_access_leg"):
                 lines.append(f"{i}. Go from your location to {leg.get('to_name')}: {leg.get('duration_minutes')} min walking, or about {leg.get('car_minutes')} min by car.")
             else:
-                lines.append(f"{i}. Walk from {leg.get('from_name')} to {leg.get('to_name')} for about {leg.get('distance_m', 0)} m.")
+                walk_m = float(leg.get('distance_m') or 0)
+                if walk_m > WALK_TO_STOP_DISTANCE_THRESHOLD_M:
+                    lines.append(f"{i}. From {leg.get('from_name')} to {leg.get('to_name')}, the remaining distance is about {leg.get('distance_m', 0)} m, more than 1 km; consider car/drop-off for this segment. Estimated car time: {leg.get('car_minutes', '--')} min.")
+                else:
+                    lines.append(f"{i}. Walk from {leg.get('from_name')} to {leg.get('to_name')} for about {leg.get('distance_m', 0)} m because it is 1 km or less.")
         return "\n".join(lines)
 
     def _optional_ai_text(self, result: dict[str, Any], language: str) -> str:
@@ -1347,9 +1380,16 @@ class DellniRouteService:
             if "سياره" in norm or "سيارة" in message or "car" in norm:
                 if access:
                     car_alt = access.get("car_to_station_then_bus") or current_route.get("car_access_to_station_estimate") or {}
+                    distance = float(access.get('distance_m') or 0)
+                    if distance <= WALK_TO_STOP_DISTANCE_THRESHOLD_M:
+                        return (
+                            f"أقرب محطة مناسبة هي {access.get('name')}. المسافة حوالي {access.get('distance_m')} متر، يعني كيلو أو أقل، "
+                            f"فالأفضل تمشي لها عشان توفر. وقت المشي حوالي {access.get('walk_minutes')} دقيقة."
+                        )
                     return (
                         f"إذا معك سيارة: أقرب محطة مناسبة هي {access.get('name')}. المسافة حوالي {access.get('distance_m')} متر، "
-                        f"والوقت بالسيارة حوالي {access.get('car_minutes')} دقيقة. بعدها كمّل بالباص، والتكلفة العامة للباص "
+                        f"وهذا أكثر من كيلو، فبنصحك تروح بسيارة من موقعك إلى {access.get('name')}. "
+                        f"الوقت بالسيارة حوالي {access.get('car_minutes')} دقيقة. بعدها كمّل بالباص، والتكلفة العامة للباص "
                         f"{current_route.get('fare_jd', 0):.2f} دينار. "
                         f"التقدير الكامل إذا وصلت للمحطة بالسيارة: {car_alt.get('estimated_total_minutes_if_car_to_station', current_route.get('total_duration_minutes'))} دقيقة."
                     )
