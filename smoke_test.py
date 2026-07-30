@@ -33,3 +33,14 @@ print("=" * 72)
 print("AI chat car access question with current route:")
 route = service.route_from_payload({"origin_coords": {"lat": 31.9945, "lon": 35.9015, "name": "موقع قريب من دوار المدينة"}, "destination": "صويلح", "departure_time": "08:00", "language": "ar"})
 print(service.ai_chat({"message": "لو معي سيارة كيف أوصل لأقرب محطة؟", "language": "ar", "current_route": route}).get("assistant_text"))
+print("=" * 72)
+print("Fastest mode access behavior:")
+fast_route = service.route_from_payload({
+    "origin_coords": {"lat": 31.9945, "lon": 35.9015, "name": "موقع قريب من دوار المدينة"},
+    "destination": "صويلح",
+    "departure_time": "08:00",
+    "language": "ar",
+    "priority": "fastest",
+})
+print("Priority:", fast_route.get("priority"), "Duration:", fast_route.get("total_duration_minutes"), "Fast adjusted:", fast_route.get("fastest_total_duration_minutes"))
+print((fast_route.get("assistant_text") or "")[:700])

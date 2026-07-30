@@ -14,9 +14,9 @@
       "5": "Saturday",
       "6": "Sunday"
     },
-    "coverage_summary": "يغطي خطوط الباص السريع 98، 99، 100، 102، 103، 104، 105 وخطوط ربط مختارة من باص عمّان 34، 36، 42، 52، 53، 55، 58، 60، 64 ضمن نطاق عمّان والوجهات التي تحتوي نقاط ركوب موثقة في نسخة التسليم.",
+    "coverage_summary": "يغطي خطوط الباص السريع 98، 99، 100، 102، 103، 104، 105 وخطوط ربط مختارة من باص عمّان 34، 36، 42، 52، 53، 55، 58، 60، 64. تم استبعاد وجهات السلط/107 من نسخة التسليم الحالية.",
     "verification_level": "تمت مراجعة أرقام الخطوط والتعرفة من ملفات التعرفة الرسمية، ومراجعة أن تطبيق Vision City Bus يعرض التخطيط، المحطات، الوقت والتعرفة. لا يوجد GTFS/AVL رسمي مفتوح في هذه النسخة؛ لذلك تُعرض الإحداثيات والوقت بين المحطات كبيانات MVP قابلة للاستبدال.",
-    "important_note": "MVP transit data is structured from public Amman Bus/BRT route/fare information and demo validation. It is not a live official GTFS/AVL feed. Route drawing uses OpenStreetMap/OSRM in the browser to avoid straight airborne lines when online.",
+    "important_note": "MVP transit data is structured from public Amman Bus/BRT route/fare information and demo validation. It is not a live official GTFS/AVL feed. Route drawing uses OpenStreetMap/OSRM in the browser to avoid straight airborne lines when online. تم حذف خط/وجهات السلط من نسخة التسليم الحالية بناءً على قرار الفريق، وتعرض القائمة محطات/معالم مرتبطة فعليًا بالشبكة فقط.",
     "data_sources": [
       {
         "label": "Vision City Bus / Amman Bus official website",
@@ -42,8 +42,7 @@
     "data_quality_flags": [
       "No public official GTFS/AVL feed found; generated schedules are approximations.",
       "Selected Amman Bus connector routes are included to demonstrate multimodal fallback logic.",
-      "تم حذف خيارات النقل الخاص والعلامات التجارية من واجهة التسليم الحالية؛ وضع التحسين الوحيد هو التوفير.",
-      "تم حذف خط/خيارات السلط وجامعة البلقاء من نسخة التسليم الحالية لأن المستخدم طلب إخفاء الوجهات التي لا تحتوي محطة موثقة داخل تجربة التطبيق."
+      "تم حذف خيارات النقل الخاص والعلامات التجارية من واجهة التسليم الحالية؛ وضع التحسين الوحيد هو التوفير."
     ],
     "station_quality_seed": {
       "sweileh_terminal": {

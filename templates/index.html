@@ -41,7 +41,16 @@
           <div>
             <h1 data-i18n="mainTitle">وين بدك تروح؟</h1>
           </div>
-          <span class="mode-badge" data-i18n="savingBadge">أقل تكلفة</span>
+          <span id="modeBadge" class="mode-badge" data-i18n="savingBadge">أقل تكلفة</span>
+        </div>
+
+        <div class="mode-toggle" role="radiogroup" aria-label="اختيار نوع المسار">
+          <button id="lowestModeBtn" type="button" class="mode-choice active" data-mode="lowest_cost" aria-pressed="true">
+            <span>💸</span><b data-i18n="cheapestMode">الأوفر</b>
+          </button>
+          <button id="fastestModeBtn" type="button" class="mode-choice" data-mode="fastest" aria-pressed="false">
+            <span>⚡</span><b data-i18n="fastestMode">الأسرع</b>
+          </button>
         </div>
 
         <div class="field-stack">
@@ -129,10 +138,6 @@
           <p data-i18n="chatHelp">احكي أو اكتب رحلتك. دلني يرحب فيك، يفهم طلبك، ثم يحسب أوفر مسار من الداتا.</p>
         </div>
       </header>
-      <div id="aiLoadingOverlay" class="ai-loading-overlay hidden" aria-live="polite" aria-hidden="true">
-        <div class="ai-spinner" role="status" aria-label="دلني يفكر"></div>
-        <strong>دلني يفكر...</strong>
-      </div>
       <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
       <div class="chat-compose">
         <button id="startVoiceBtn" class="mic-btn" type="button" aria-label="تسجيل صوتي">🎙️</button>
@@ -142,6 +147,13 @@
       <p id="voiceStatus" class="hint"></p>
     </section>
   </dialog>
+
+  <div id="globalAiLoader" class="global-ai-loader hidden" role="status" aria-live="polite" aria-label="دلني يفكر">
+    <div class="global-ai-loader-card">
+      <span class="ai-spinner" aria-hidden="true"></span>
+      <span class="ai-loader-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="{{ url_for('static', filename='app.js') }}"></script>
