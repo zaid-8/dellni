@@ -1147,6 +1147,50 @@ class DellniRouteService:
         result["data_notice"] = self.metadata.get("important_note", "")
         return result
 
+    def _nearest_shape_index(self, shape: list[list[float]], stop_id: str) -> int | None:
+        if not shape or stop_id not in self.data.stops:
+            return None
+        stop = self.data.stops[stop_id]
+        target = (stop.lat, stop.lon)
+        best_i = None
+        best_d = float("inf")
+        for i, p in enumerate(shape):
+            try:
+                d = haversine_m((float(p[0]), float(p[1])), target)
+            except Exception:
+                continue
+            if d < best_d:
+                best_i = i
+                best_d = d
+        return best_i
+
+    def _route_shape_segment(self, meta: RouteMeta | None, from_stop_id: str | None, to_stop_id: str | None) -> tuple[list[list[float]], str]:
+        """Return the stored bus-corridor shape segment between two stops.
+
+        This deliberately avoids asking OSRM for a shortest driving route for bus legs.
+        OSRM is useful for walking access, but for public transit it can cut through a
+        different road and create the "flying / wrong bus route" issue. The bus leg should
+        follow the stored transit corridor for that route direction.
+        """
+        if not meta or not meta.shape or not from_stop_id or not to_stop_id:
+            return [], ""
+        shape = [[float(a), float(b)] for a, b in meta.shape]
+        start_i = self._nearest_shape_index(shape, from_stop_id)
+        end_i = self._nearest_shape_index(shape, to_stop_id)
+        if start_i is None or end_i is None:
+            return [], ""
+        if start_i <= end_i:
+            segment = shape[start_i:end_i + 1]
+        else:
+            segment = list(reversed(shape[end_i:start_i + 1]))
+        # Make sure exact stop coordinates are visible at the beginning/end.
+        start_stop = self.data.stops[from_stop_id]
+        end_stop = self.data.stops[to_stop_id]
+        if segment:
+            segment[0] = [start_stop.lat, start_stop.lon]
+            segment[-1] = [end_stop.lat, end_stop.lon]
+        return segment, (meta.shape_source or "stored_transit_shape")
+
     def _enrich_bus_leg(self, leg: dict[str, Any]) -> None:
         route_id = leg.get("route_id")
         meta = self.route_meta.get(route_id) if route_id else None
@@ -1171,16 +1215,22 @@ class DellniRouteService:
             leg["to_station_rating"] = getattr(stop, "station_rating", None)
         geometry: list[list[float]] = []
         via: list[dict[str, Any]] = []
+        shape_source = ""
         if route_id and from_stop_id and to_stop_id and route_id in self.data.routes:
             stop_ids = list(self.data.routes[route_id].stop_ids)
             try:
                 i, j = stop_ids.index(from_stop_id), stop_ids.index(to_stop_id)
-                segment = stop_ids[i:j + 1] if i <= j else stop_ids[j:i + 1]
-                geometry = [[self.data.stops[sid].lat, self.data.stops[sid].lon] for sid in segment]
+                segment = stop_ids[i:j + 1] if i <= j else list(reversed(stop_ids[j:i + 1]))
+                geometry, shape_source = self._route_shape_segment(meta, from_stop_id, to_stop_id)
+                if not geometry:
+                    geometry = [[self.data.stops[sid].lat, self.data.stops[sid].lon] for sid in segment]
+                    shape_source = "stop_sequence_fallback"
                 via = [self._stop_public(sid) for sid in segment]
             except ValueError:
                 pass
         leg["geometry"] = geometry
+        leg["shape_source"] = shape_source
+        leg["bus_geometry_locked"] = bool(shape_source and shape_source != "stop_sequence_fallback")
         leg["intermediate_stops"] = via
 
     def _infer_leg_stop_ids(self, leg: dict[str, Any]) -> tuple[str | None, str | None]:

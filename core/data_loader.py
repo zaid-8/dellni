@@ -18,6 +18,8 @@ class RouteMeta:
     fare_jd: float
     stop_ids: tuple[str, ...]
     source_note: str = ""
+    shape: tuple[tuple[float, float], ...] = ()
+    shape_source: str = ""
 
 
 def load_amman_brt_json(path: str | Path, apply_realtime_sample: bool = True) -> tuple[TransitData, dict[str, RouteMeta], dict[str, Any]]:
@@ -65,6 +67,8 @@ def load_amman_brt_json(path: str | Path, apply_realtime_sample: bool = True) ->
             fare_jd=float(r.get("fare_jd", 0.0)),
             stop_ids=tuple(r["stops"]),
             source_note=str(r.get("source_note") or ""),
+            shape=tuple((float(p[0]), float(p[1])) for p in r.get("shape", [])),
+            shape_source=str(r.get("shape_source") or ""),
         )
 
     stop_times_by_trip: dict[str, list[tuple[int, StopTime]]] = defaultdict(list)
