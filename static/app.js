@@ -483,11 +483,7 @@ async function renderMap(data) {
       const routed = await getWalkingGeometry(leg.from_coord, leg.to_coord);
       if (routed && routed.length >= 2) geometry = routed;
     }
-    // Bus legs use stored transit-corridor geometry from the backend.
-    // Do not ask OSRM for a shortest driving route here, because that can cut
-    // through a different street and make the bus line look wrong.
-    if (leg.mode === 'bus' && geometry.length >= 2 && !leg.bus_geometry_locked) {
-      // Fallback only for old data with no stored shape.
+    if (leg.mode === 'bus' && geometry.length >= 2) {
       const roadLine = await getRoadGeometry(geometry, 'driving');
       if (roadLine && roadLine.length >= 2) geometry = roadLine;
     }
