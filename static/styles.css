@@ -778,3 +778,7 @@ body {
   .mode-toggle { gap: 7px; padding: 5px; border-radius: 18px; }
   .mode-choice { min-height: 46px; border-radius: 15px; font-size: .88rem; }
 }
+
+/* Final delivery cleanup: hide duplicate lower area planner and use spinner-only loading. */
+.area-mode-section { display: none !important; }
+body.route-searching #systemStatus { opacity: .78; }

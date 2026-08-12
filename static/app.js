@@ -11,7 +11,7 @@ const i18n = {
     rateTrip: 'قيّم الرحلة بعد ما تخلص', sendRating: 'إرسال التقييم', generalArea: 'اختيار المنطقة العامة', areaTitle: 'مش فارق الشارع بالزبط؟',
     areaSubtitle: 'اكتب المنطقة اللي أنت فيها والمنطقة اللي بدك توصلها، ودلني يختار أقرب محطات ويوفر عليك.', currentArea: 'منطقة البداية', targetArea: 'منطقة الوجهة', areaSubmit: 'احسب أوفر طريق بالمنطقة',
     dataSummary: 'مصادر البيانات وحدود الدقة', chatTitle: 'شات دلني الذكي', chatHelp: 'احكي أو اكتب رحلتك. دلني يرحب فيك، يفهم طلبك، ثم يحسب أوفر مسار من الداتا.', startVoice: 'تحدث الآن', sendChat: 'إرسال',
-    ready: 'جاهز', routing: 'دلني يحسب الطريق...', chooseStart: 'اضغط على الخريطة لاختيار نقطة البداية.', chooseEnd: 'اضغط على الخريطة لاختيار الوجهة.', selected: 'تم التحديد. دلني سيحسب الطريق تلقائيا عند توفر النقطتين.', noGeo: 'المتصفح لا يدعم تحديد الموقع.', locating: 'جاري تحديد الموقع بدقة...', locationSet: 'تم تحديد موقعك الحالي', routeError: 'صار خطأ تقني', noRoute: 'لم يتم العثور على مسار.', alertOn: 'إيقاف تنبيه النزول', alertOff: 'فعّل تنبيه النزول عند 250 متر', alertEnabled: 'تم تفعيل تنبيه النزول.', alertStopped: 'تم إيقاف تنبيه النزول.', feedbackSaved: 'تم حفظ التقييم، شكرا إلك.', unsupportedVoice: 'المتصفح لا يدعم التعرف على الصوت. جرّب Chrome.', listening: 'اسمعك...', voiceDone: 'تم التقاط الكلام. راجعه ثم اضغط إرسال.',
+    ready: 'جاهز', routing: '...', chooseStart: 'اضغط على الخريطة لاختيار نقطة البداية.', chooseEnd: 'اضغط على الخريطة لاختيار الوجهة.', selected: 'تم التحديد. دلني سيحسب الطريق تلقائيا عند توفر النقطتين.', noGeo: 'المتصفح لا يدعم تحديد الموقع.', locating: 'جاري تحديد الموقع بدقة...', locationSet: 'تم تحديد موقعك الحالي', routeError: 'صار خطأ تقني', noRoute: 'لم يتم العثور على مسار.', alertOn: 'إيقاف تنبيه النزول', alertOff: 'فعّل تنبيه النزول عند 250 متر', alertEnabled: 'تم تفعيل تنبيه النزول.', alertStopped: 'تم إيقاف تنبيه النزول.', feedbackSaved: 'تم حفظ التقييم، شكرا إلك.', unsupportedVoice: 'المتصفح لا يدعم التعرف على الصوت. جرّب Chrome.', listening: 'اسمعك...', voiceDone: 'تم التقاط الكلام. راجعه ثم اضغط إرسال.',
     walk: 'مشي', bus: 'باص', line: 'خط', fare: 'التكلفة', time: 'الوقت', arrival: 'الوصول', walking: 'المشي', walkDistance: 'مسافة المشي', transfers: 'التبديلات', quality: 'التقييم', nearestStart: 'أقرب محطة للبداية', nearestEnd: 'أقرب محطة للوجهة', routeSteps: 'خطوات الرحلة', passedStops: 'المحطات على الخط', rating: 'تقييم', minutes: 'دقيقة', meters: 'متر', jd: 'دينار', exactWalk: 'مسار المشي على الخريطة من OpenStreetMap عند توفر الإنترنت', car: 'سيارة', accessToStation: 'الوصول للمحطة', carAccess: 'إذا معك سيارة', walkAccess: 'إذا بدك تمشي', fullCarAccess: 'تقدير السيارة للمحطة',
   },
   en: {
@@ -24,7 +24,7 @@ const i18n = {
     rateTrip: 'Rate the trip when finished', sendRating: 'Send rating', generalArea: 'General area mode', areaTitle: 'No exact street needed?',
     areaSubtitle: 'Type your start area and target area; Dellni chooses nearby stops to save cost.', currentArea: 'Start area', targetArea: 'Target area', areaSubmit: 'Calculate by area',
     dataSummary: 'Data sources and accuracy limits', chatTitle: 'Dellni AI chat', chatHelp: 'Write or speak your trip. Dellni greets you, understands the request, then calculates from verified data.', startVoice: 'Speak now', sendChat: 'Send',
-    ready: 'Ready', routing: 'Dellni is calculating...', chooseStart: 'Press the map to choose the start point.', chooseEnd: 'Press the map to choose the destination.', selected: 'Point selected. Dellni will calculate automatically when both points are available.', noGeo: 'Your browser does not support geolocation.', locating: 'Getting precise location...', locationSet: 'Current location set', routeError: 'Technical error', noRoute: 'No route found.', alertOn: 'Stop exit alert', alertOff: 'Enable 250 m exit alert', alertEnabled: 'Exit alert enabled.', alertStopped: 'Exit alert stopped.', feedbackSaved: 'Rating saved. Thank you.', unsupportedVoice: 'Speech recognition is not supported. Try Chrome.', listening: 'Listening...', voiceDone: 'Speech captured. Review it, then press Send.',
+    ready: 'Ready', routing: '...', chooseStart: 'Press the map to choose the start point.', chooseEnd: 'Press the map to choose the destination.', selected: 'Point selected. Dellni will calculate automatically when both points are available.', noGeo: 'Your browser does not support geolocation.', locating: 'Getting precise location...', locationSet: 'Current location set', routeError: 'Technical error', noRoute: 'No route found.', alertOn: 'Stop exit alert', alertOff: 'Enable 250 m exit alert', alertEnabled: 'Exit alert enabled.', alertStopped: 'Exit alert stopped.', feedbackSaved: 'Rating saved. Thank you.', unsupportedVoice: 'Speech recognition is not supported. Try Chrome.', listening: 'Listening...', voiceDone: 'Speech captured. Review it, then press Send.',
     walk: 'Walk', bus: 'Bus', line: 'Line', fare: 'Fare', time: 'Time', arrival: 'Arrival', walking: 'Walking', walkDistance: 'Walking distance', transfers: 'Transfers', quality: 'Rating', nearestStart: 'Nearest start stop', nearestEnd: 'Nearest destination stop', routeSteps: 'Trip steps', passedStops: 'Stops on this line', rating: 'Rating', minutes: 'min', meters: 'm', jd: 'JD', exactWalk: 'Walking route is drawn from OpenStreetMap when online', car: 'Car', accessToStation: 'Access to station', carAccess: 'If you have a car', walkAccess: 'If you walk', fullCarAccess: 'Car to station estimate',
   }
 };
@@ -88,8 +88,8 @@ function applyLanguage() {
   $('langToggle').textContent = lang === 'ar' ? 'English' : 'العربية';
   $('origin').placeholder = lang === 'ar' ? 'مثال: صويلح أو موقعي الحالي' : 'Example: Sweileh or my location';
   $('destination').placeholder = lang === 'ar' ? 'مثال: العبدلي أو الزرقاء' : 'Example: Abdali or Zarqa';
-  $('areaOrigin').placeholder = lang === 'ar' ? 'مثال: خلدا' : 'Example: Khalda';
-  $('areaDestination').placeholder = lang === 'ar' ? 'مثال: العبدلي' : 'Example: Abdali';
+  if ($('areaOrigin')) $('areaOrigin').placeholder = lang === 'ar' ? 'مثال: خلدا' : 'Example: Khalda';
+  if ($('areaDestination')) $('areaDestination').placeholder = lang === 'ar' ? 'مثال: العبدلي' : 'Example: Abdali';
   if ($('chatInput')) $('chatInput').placeholder = lang === 'ar' ? 'احكي مثلاً: من صويلح إلى 42 عمان الساعة ٨' : 'Example: from Sweileh to 42 Amman at 8';
   setStatus(currentRoute ? t('ready') : t('ready'));
   updateModeUi();
@@ -141,8 +141,14 @@ async function postJson(url, payload) {
 }
 function setStatus(text) { $('systemStatus').textContent = text; }
 function setBusy(isBusy) {
-  document.querySelectorAll('button').forEach((btn) => { if (!['langToggle'].includes(btn.id)) btn.disabled = isBusy && btn.classList.contains('primary-submit'); });
-  setStatus(isBusy ? t('routing') : t('ready'));
+  document.querySelectorAll('button').forEach((btn) => {
+    if (!['langToggle'].includes(btn.id)) btn.disabled = isBusy && btn.classList.contains('primary-submit');
+  });
+  document.body.classList.toggle('route-searching', Boolean(isBusy));
+  if (isBusy) showAiLoading('route');
+  else hideAiLoading();
+  // Do not show text like "دلني يحسب الطريق" in the header; the spinner is the loading signal.
+  setStatus(t('ready'));
 }
 
 function initMap() {
@@ -305,7 +311,7 @@ async function submitRoute(payload, endpoint='/api/route') {
   setBusy(true);
   try {
     const data = await postJson(endpoint, payload);
-    renderAssistantResult(data, true);
+    await renderAssistantResult(data, true);
   } catch (error) {
     showResultError(`${t('routeError')}: ${error.message}`);
   } finally {
@@ -322,7 +328,7 @@ function showResultError(text) {
   $('tripFeedback').classList.add('hidden');
 }
 
-function renderAssistantResult(data, scrollToResult=true) {
+async function renderAssistantResult(data, scrollToResult=true) {
   currentRoute = data;
   if (data.priority && data.priority !== currentPriority) setPriorityMode(data.priority, false);
   $('resultPanel').classList.remove('hidden');
@@ -342,7 +348,7 @@ function renderAssistantResult(data, scrollToResult=true) {
   renderAccess(data);
   renderNearest(data.nearest);
   renderSteps(data);
-  renderMap(data);
+  await renderMap(data);
   $('tripFeedback').classList.remove('hidden');
   $('alertBtn').disabled = !data.proximity_target;
   $('alertBtn').textContent = t('alertOff');
@@ -483,6 +489,10 @@ async function renderMap(data) {
       const routed = await getWalkingGeometry(leg.from_coord, leg.to_coord);
       if (routed && routed.length >= 2) geometry = routed;
     }
+    // Bus legs are NOT drawn as direct "flying" lines.
+    // The backend sends route-specific corridor/control points; the frontend snaps
+    // those points to OpenStreetMap roads so the visual line follows streets.
+    // This is still a static MVP shape, not a live official GTFS shape feed.
     if (leg.mode === 'bus' && geometry.length >= 2) {
       const roadLine = await getRoadGeometry(geometry, 'driving');
       if (roadLine && roadLine.length >= 2) geometry = roadLine;
@@ -634,7 +644,7 @@ function setupVoice() {
     recognition.start();
   });
 }
-function showAiLoading() {
+function showAiLoading(kind='ai') {
   const loader = $('globalAiLoader');
   if (!loader) return;
   loader.classList.remove('hidden');
@@ -681,7 +691,7 @@ async function sendChatMessage() {
     const data = await postJson('/api/ai-chat', {message, language: lang, departure_time: $('departureTime').value, current_route: currentRoute, priority: currentPriority});
     hideAiLoading();
     addChatMessage('assistant', data.assistant_text || 'تم.');
-    if (data.route) renderAssistantResult(data.route, false);
+    if (data.route) await renderAssistantResult(data.route, false);
   } catch (error) {
     hideAiLoading();
     addChatMessage('assistant', `${t('routeError')}: ${error.message}`);
@@ -750,14 +760,16 @@ function wireEvents() {
   $('origin').addEventListener('keydown', (e) => { if (e.key === 'Enter') maybeAutoRoute(); });
   $('destination').addEventListener('keydown', (e) => { if (e.key === 'Enter') maybeAutoRoute(); });
   $('departureTime').addEventListener('change', maybeAutoRoute);
-  $('areaForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const origin = $('areaOrigin').value.trim();
-    const destination = $('areaDestination').value.trim();
-    if (!origin || !destination) return;
-    $('origin').value = origin; $('destination').value = destination; originCoords = null; destinationCoords = null;
-    submitRoute({origin, destination, departure_time:$('departureTime').value, language:lang, priority:currentPriority}, '/api/route');
-  });
+  if ($('areaForm')) {
+    $('areaForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const origin = $('areaOrigin').value.trim();
+      const destination = $('areaDestination').value.trim();
+      if (!origin || !destination) return;
+      $('origin').value = origin; $('destination').value = destination; originCoords = null; destinationCoords = null;
+      submitRoute({origin, destination, departure_time:$('departureTime').value, language:lang, priority:currentPriority}, '/api/route');
+    });
+  }
   $('alertBtn').addEventListener('click', toggleExitAlert);
   $('tripFeedback').addEventListener('submit', async (e) => {
     e.preventDefault();

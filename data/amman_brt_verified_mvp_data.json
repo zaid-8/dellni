@@ -256,7 +256,9 @@
         "accessibility_score": 4.2
       }
     },
-    "last_mvp_revision": "route99_landmark_geometry_fix"
+    "last_mvp_revision": "static_bus_corridor_shapes_no_flying_lines",
+    "route_geometry_note_ar": "تمت إضافة أشكال خطوط ثابتة للحافلات حتى يظهر مسار الباص على ممره/شارعه بدلا من خط مستقيم أو مسار سيارات مختصر. يمكن استبدالها لاحقا بملفات GTFS shapes الرسمية عند توفرها.",
+    "route_geometry_note_en": "Static bus-corridor shapes were added so bus legs render on their transit corridor instead of straight lines or shortest-car shortcuts. They can be replaced by official GTFS shapes when available."
   },
   "stops": [
     {
@@ -840,7 +842,80 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 98 Sweileh - Tariq/Tabarbour Corridor",
-      "direction_en": "Tariq/Tabarbour to Sweileh"
+      "direction_en": "Tariq/Tabarbour to Sweileh",
+      "shape": [
+        [
+          31.9917,
+          35.9285
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9901,
+          35.9193
+        ],
+        [
+          31.9878,
+          35.9102
+        ],
+        [
+          31.9869,
+          35.9018
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0229,
+          35.8647
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_098_out",
@@ -858,7 +933,80 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 98 Sweileh - Tariq/Tabarbour Corridor",
-      "direction_en": "Sweileh to Tariq/Tabarbour"
+      "direction_en": "Sweileh to Tariq/Tabarbour",
+      "shape": [
+        [
+          32.0229,
+          35.8647
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9869,
+          35.9018
+        ],
+        [
+          31.9878,
+          35.9102
+        ],
+        [
+          31.9901,
+          35.9193
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9917,
+          35.9285
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_099_back",
@@ -884,7 +1032,128 @@
       ],
       "source_note": "Route 99 was expanded for the MVP with landmark stops published as major BRT 99 points (Sweileh, University of Jordan, Sports City, King Abdullah Gardens, Wadi Saqra, Arab Medical Center, Amideast, Ras Al Ain, GAM, Jordan Museum) plus high-demand landmarks used in the demo. Exact live AVL/GTFS data is not exposed as a public API; replace this JSON with official GTFS when available.",
       "name_en": "BRT 99 Sweileh Terminal - Jordan Museum",
-      "direction_en": "Jordan Museum to Sweileh"
+      "direction_en": "Jordan Museum to Sweileh",
+      "shape": [
+        [
+          31.9495,
+          35.925
+        ],
+        [
+          31.9505,
+          35.9235
+        ],
+        [
+          31.9502,
+          35.9241
+        ],
+        [
+          31.9511,
+          35.9198
+        ],
+        [
+          31.9516,
+          35.9126
+        ],
+        [
+          31.9522,
+          35.9042
+        ],
+        [
+          31.9533,
+          35.8959
+        ],
+        [
+          31.953944,
+          35.887382
+        ],
+        [
+          31.9563,
+          35.891
+        ],
+        [
+          31.9569,
+          35.8972
+        ],
+        [
+          31.9588,
+          35.8932
+        ],
+        [
+          31.9599,
+          35.8895
+        ],
+        [
+          31.9672,
+          35.8959
+        ],
+        [
+          31.9718,
+          35.8993
+        ],
+        [
+          31.9752,
+          35.8998
+        ],
+        [
+          31.9787,
+          35.9001
+        ],
+        [
+          31.9835,
+          35.8975
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0229,
+          35.8647
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_099_out",
@@ -910,7 +1179,128 @@
       ],
       "source_note": "Route 99 was expanded for the MVP with landmark stops published as major BRT 99 points (Sweileh, University of Jordan, Sports City, King Abdullah Gardens, Wadi Saqra, Arab Medical Center, Amideast, Ras Al Ain, GAM, Jordan Museum) plus high-demand landmarks used in the demo. Exact live AVL/GTFS data is not exposed as a public API; replace this JSON with official GTFS when available.",
       "name_en": "BRT 99 Sweileh Terminal - Jordan Museum",
-      "direction_en": "Sweileh to Jordan Museum"
+      "direction_en": "Sweileh to Jordan Museum",
+      "shape": [
+        [
+          32.0229,
+          35.8647
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9835,
+          35.8975
+        ],
+        [
+          31.9787,
+          35.9001
+        ],
+        [
+          31.9752,
+          35.8998
+        ],
+        [
+          31.9718,
+          35.8993
+        ],
+        [
+          31.9672,
+          35.8959
+        ],
+        [
+          31.9599,
+          35.8895
+        ],
+        [
+          31.9588,
+          35.8932
+        ],
+        [
+          31.9569,
+          35.8972
+        ],
+        [
+          31.9563,
+          35.891
+        ],
+        [
+          31.953944,
+          35.887382
+        ],
+        [
+          31.9533,
+          35.8959
+        ],
+        [
+          31.9522,
+          35.9042
+        ],
+        [
+          31.9516,
+          35.9126
+        ],
+        [
+          31.9511,
+          35.9198
+        ],
+        [
+          31.9502,
+          35.9241
+        ],
+        [
+          31.9505,
+          35.9235
+        ],
+        [
+          31.9495,
+          35.925
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_100_back",
@@ -930,7 +1320,68 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 100 Al Mahatta - Sweileh",
-      "direction_en": "Sweileh to Al Mahatta"
+      "direction_en": "Sweileh to Al Mahatta",
+      "shape": [
+        [
+          32.0229,
+          35.8647
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.978,
+          35.8994
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.9625,
+          35.9114
+        ],
+        [
+          31.9554,
+          35.9186
+        ],
+        [
+          31.9495,
+          35.925
+        ],
+        [
+          31.951,
+          35.932
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.9565,
+          35.9401
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_100_out",
@@ -950,7 +1401,68 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 100 Al Mahatta - Sweileh",
-      "direction_en": "Al Mahatta to Sweileh"
+      "direction_en": "Al Mahatta to Sweileh",
+      "shape": [
+        [
+          31.9565,
+          35.9401
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.951,
+          35.932
+        ],
+        [
+          31.9495,
+          35.925
+        ],
+        [
+          31.9554,
+          35.9186
+        ],
+        [
+          31.9625,
+          35.9114
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.978,
+          35.8994
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0229,
+          35.8647
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_102_back",
@@ -967,7 +1479,64 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 102 Sports City - Zarqa",
-      "direction_en": "Zarqa to Sports City"
+      "direction_en": "Zarqa to Sports City",
+      "shape": [
+        [
+          32.0725,
+          36.087
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9817,
+          35.959
+        ],
+        [
+          31.9897,
+          35.943
+        ],
+        [
+          31.9917,
+          35.9285
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9883,
+          35.905
+        ],
+        [
+          31.9867,
+          35.8942
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_102_out",
@@ -984,7 +1553,64 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 102 Sports City - Zarqa",
-      "direction_en": "Sports City to Zarqa"
+      "direction_en": "Sports City to Zarqa",
+      "shape": [
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9883,
+          35.905
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9917,
+          35.9285
+        ],
+        [
+          31.9897,
+          35.943
+        ],
+        [
+          31.9817,
+          35.959
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0725,
+          36.087
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_103_back",
@@ -1001,7 +1627,56 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 103 Al Mahatta - Zarqa",
-      "direction_en": "Zarqa to Al Mahatta"
+      "direction_en": "Zarqa to Al Mahatta",
+      "shape": [
+        [
+          32.0725,
+          36.087
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9655,
+          35.964
+        ],
+        [
+          31.958,
+          35.952
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.9565,
+          35.9401
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_103_out",
@@ -1018,7 +1693,56 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 103 Al Mahatta - Zarqa",
-      "direction_en": "Al Mahatta to Zarqa"
+      "direction_en": "Al Mahatta to Zarqa",
+      "shape": [
+        [
+          31.9565,
+          35.9401
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.958,
+          35.952
+        ],
+        [
+          31.9655,
+          35.964
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0725,
+          36.087
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_104_back",
@@ -1038,7 +1762,108 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 104 Zarqa - Sweileh",
-      "direction_en": "Sweileh to Zarqa"
+      "direction_en": "Sweileh to Zarqa",
+      "shape": [
+        [
+          32.0229,
+          35.8647
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9883,
+          35.905
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9917,
+          35.9285
+        ],
+        [
+          31.9897,
+          35.943
+        ],
+        [
+          31.9817,
+          35.959
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0725,
+          36.087
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_104_out",
@@ -1058,7 +1883,108 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 104 Zarqa - Sweileh",
-      "direction_en": "Zarqa to Sweileh"
+      "direction_en": "Zarqa to Sweileh",
+      "shape": [
+        [
+          32.0725,
+          36.087
+        ],
+        [
+          32.0536,
+          36.0766
+        ],
+        [
+          32.0315,
+          36.06
+        ],
+        [
+          32.0164,
+          36.046
+        ],
+        [
+          31.9995,
+          36.0185
+        ],
+        [
+          31.9865,
+          35.9915
+        ],
+        [
+          31.974,
+          35.975
+        ],
+        [
+          31.9817,
+          35.959
+        ],
+        [
+          31.9897,
+          35.943
+        ],
+        [
+          31.9917,
+          35.9285
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9883,
+          35.905
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9907,
+          35.8914
+        ],
+        [
+          31.9949,
+          35.8871
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.0047,
+          35.8807
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0123,
+          35.8742
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0174,
+          35.87
+        ],
+        [
+          32.0197,
+          35.8677
+        ],
+        [
+          32.0214,
+          35.8659
+        ],
+        [
+          32.0229,
+          35.8647
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_105_back",
@@ -1084,7 +2010,88 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 105 Madaba - Prince Hamza Hospital",
-      "direction_en": "Madaba to Prince Hamza Hospital / Tariq"
+      "direction_en": "Madaba to Prince Hamza Hospital / Tariq",
+      "shape": [
+        [
+          31.7182,
+          35.7956
+        ],
+        [
+          31.7189,
+          35.7948
+        ],
+        [
+          31.7235,
+          35.7939
+        ],
+        [
+          31.7057,
+          35.7915
+        ],
+        [
+          31.7375,
+          35.801
+        ],
+        [
+          31.7655,
+          35.8274
+        ],
+        [
+          31.779,
+          35.875
+        ],
+        [
+          31.789,
+          35.9168
+        ],
+        [
+          31.828,
+          35.907
+        ],
+        [
+          31.865,
+          35.892
+        ],
+        [
+          31.91,
+          35.885
+        ],
+        [
+          31.931,
+          35.8855
+        ],
+        [
+          31.9446,
+          35.8862
+        ],
+        [
+          31.9631,
+          35.8907
+        ],
+        [
+          31.9754,
+          35.8917
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.991,
+          35.9065
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.9968,
+          35.9302
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "brt_105_out",
@@ -1110,7 +2117,88 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "BRT 105 Prince Hamza Hospital - Madaba",
-      "direction_en": "Prince Hamza Hospital / Tariq to Madaba"
+      "direction_en": "Prince Hamza Hospital / Tariq to Madaba",
+      "shape": [
+        [
+          31.9968,
+          35.9302
+        ],
+        [
+          31.9964,
+          35.9178
+        ],
+        [
+          31.991,
+          35.9065
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9754,
+          35.8917
+        ],
+        [
+          31.9631,
+          35.8907
+        ],
+        [
+          31.9446,
+          35.8862
+        ],
+        [
+          31.931,
+          35.8855
+        ],
+        [
+          31.91,
+          35.885
+        ],
+        [
+          31.865,
+          35.892
+        ],
+        [
+          31.828,
+          35.907
+        ],
+        [
+          31.789,
+          35.9168
+        ],
+        [
+          31.779,
+          35.875
+        ],
+        [
+          31.7655,
+          35.8274
+        ],
+        [
+          31.7375,
+          35.801
+        ],
+        [
+          31.7057,
+          35.7915
+        ],
+        [
+          31.7235,
+          35.7939
+        ],
+        [
+          31.7189,
+          35.7948
+        ],
+        [
+          31.7182,
+          35.7956
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_34_out",
@@ -1131,7 +2219,56 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 34 University of Jordan - Marj Al-Hammam",
-      "direction_en": "University of Jordan to Marj Al-Hammam"
+      "direction_en": "University of Jordan to Marj Al-Hammam",
+      "shape": [
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0,
+          35.885
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.978,
+          35.887
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.9594,
+          35.842
+        ],
+        [
+          31.941,
+          35.834
+        ],
+        [
+          31.914,
+          35.83
+        ],
+        [
+          31.8909,
+          35.8274
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_34_back",
@@ -1152,7 +2289,56 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 34 University of Jordan - Marj Al-Hammam",
-      "direction_en": "Marj Al-Hammam to University of Jordan"
+      "direction_en": "Marj Al-Hammam to University of Jordan",
+      "shape": [
+        [
+          31.8909,
+          35.8274
+        ],
+        [
+          31.914,
+          35.83
+        ],
+        [
+          31.941,
+          35.834
+        ],
+        [
+          31.9594,
+          35.842
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.978,
+          35.887
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          32.0,
+          35.885
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0146,
+          35.872
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_36_out",
@@ -1174,7 +2360,52 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 36 Al Mahatta - Abdoun",
-      "direction_en": "Al Mahatta to Abdoun"
+      "direction_en": "Al Mahatta to Abdoun",
+      "shape": [
+        [
+          31.9565,
+          35.9401
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.9495,
+          35.925
+        ],
+        [
+          31.9519,
+          35.9181
+        ],
+        [
+          31.9558,
+          35.9099
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.9511,
+          35.8834
+        ],
+        [
+          31.9446,
+          35.8862
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_36_back",
@@ -1196,7 +2427,52 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 36 Al Mahatta - Abdoun",
-      "direction_en": "Abdoun to Al Mahatta"
+      "direction_en": "Abdoun to Al Mahatta",
+      "shape": [
+        [
+          31.9446,
+          35.8862
+        ],
+        [
+          31.9511,
+          35.8834
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9558,
+          35.9099
+        ],
+        [
+          31.9519,
+          35.9181
+        ],
+        [
+          31.9495,
+          35.925
+        ],
+        [
+          31.9512,
+          35.9375
+        ],
+        [
+          31.9565,
+          35.9401
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_42_out",
@@ -1217,7 +2493,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 42 Islamic Hospital - Sweileh Terminal",
-      "direction_en": "Islamic Hospital to Sweileh"
+      "direction_en": "Islamic Hospital to Sweileh",
+      "shape": [
+        [
+          31.9709,
+          35.9008
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.98,
+          35.899
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.0229,
+          35.8647
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_42_back",
@@ -1238,7 +2551,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 42 Islamic Hospital - Sweileh Terminal",
-      "direction_en": "Sweileh to Islamic Hospital"
+      "direction_en": "Sweileh to Islamic Hospital",
+      "shape": [
+        [
+          32.0229,
+          35.8647
+        ],
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.98,
+          35.899
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.9709,
+          35.9008
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_52_out",
@@ -1256,7 +2606,36 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 52 Sports City - Khalda - Business Park",
-      "direction_en": "Sports City to Business Park"
+      "direction_en": "Sports City to Business Park",
+      "shape": [
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.99,
+          35.876
+        ],
+        [
+          31.9921,
+          35.8464
+        ],
+        [
+          31.985,
+          35.8415
+        ],
+        [
+          31.9806,
+          35.8371
+        ],
+        [
+          31.9758,
+          35.8344
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_52_back",
@@ -1274,7 +2653,36 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 52 Sports City - Khalda - Business Park",
-      "direction_en": "Business Park to Sports City"
+      "direction_en": "Business Park to Sports City",
+      "shape": [
+        [
+          31.9758,
+          35.8344
+        ],
+        [
+          31.9806,
+          35.8371
+        ],
+        [
+          31.985,
+          35.8415
+        ],
+        [
+          31.9921,
+          35.8464
+        ],
+        [
+          31.99,
+          35.876
+        ],
+        [
+          31.9867,
+          35.8942
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_53_out",
@@ -1292,7 +2700,32 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 53 Sports City - 8th Circle",
-      "direction_en": "Sports City to 8th Circle"
+      "direction_en": "Sports City to 8th Circle",
+      "shape": [
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.977,
+          35.886
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.9594,
+          35.842
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_53_back",
@@ -1310,7 +2743,32 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 53 Sports City - 8th Circle",
-      "direction_en": "8th Circle to Sports City"
+      "direction_en": "8th Circle to Sports City",
+      "shape": [
+        [
+          31.9594,
+          35.842
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.977,
+          35.886
+        ],
+        [
+          31.9867,
+          35.8942
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_55_out",
@@ -1331,7 +2789,48 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 55 First Circle - Sports City",
-      "direction_en": "First Circle to Sports City"
+      "direction_en": "First Circle to Sports City",
+      "shape": [
+        [
+          31.9519,
+          35.9181
+        ],
+        [
+          31.9558,
+          35.9099
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.9668,
+          35.8948
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.978,
+          35.899
+        ],
+        [
+          31.9867,
+          35.8942
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_55_back",
@@ -1352,7 +2851,48 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 55 First Circle - Sports City",
-      "direction_en": "Sports City to First Circle"
+      "direction_en": "Sports City to First Circle",
+      "shape": [
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.978,
+          35.899
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.9668,
+          35.8948
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9558,
+          35.9099
+        ],
+        [
+          31.9519,
+          35.9181
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_58_out",
@@ -1370,7 +2910,28 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 58 Interior Circle - Radio and Television",
-      "direction_en": "Interior Circle to Radio/TV"
+      "direction_en": "Interior Circle to Radio/TV",
+      "shape": [
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.9754,
+          35.8917
+        ],
+        [
+          31.9631,
+          35.8907
+        ],
+        [
+          31.9614,
+          35.8788
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_58_back",
@@ -1388,7 +2949,28 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 58 Interior Circle - Radio and Television",
-      "direction_en": "Radio/TV to Interior Circle"
+      "direction_en": "Radio/TV to Interior Circle",
+      "shape": [
+        [
+          31.9614,
+          35.8788
+        ],
+        [
+          31.9631,
+          35.8907
+        ],
+        [
+          31.9754,
+          35.8917
+        ],
+        [
+          31.9705,
+          35.9055
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_60_out",
@@ -1408,7 +2990,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 60 Second Circle - Zaha Cultural Center - City Mall",
-      "direction_en": "Second Circle to City Mall"
+      "direction_en": "Second Circle to City Mall",
+      "shape": [
+        [
+          31.9558,
+          35.9099
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.97,
+          35.846
+        ],
+        [
+          31.9806,
+          35.8371
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_60_back",
@@ -1428,7 +3047,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 60 Second Circle - Zaha Cultural Center - City Mall",
-      "direction_en": "City Mall to Second Circle"
+      "direction_en": "City Mall to Second Circle",
+      "shape": [
+        [
+          31.9806,
+          35.8371
+        ],
+        [
+          31.97,
+          35.846
+        ],
+        [
+          31.9595,
+          35.8557
+        ],
+        [
+          31.961,
+          35.8699
+        ],
+        [
+          31.9596,
+          35.8815
+        ],
+        [
+          31.9607,
+          35.8934
+        ],
+        [
+          31.9585,
+          35.9006
+        ],
+        [
+          31.9558,
+          35.9099
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_64_out",
@@ -1448,7 +3104,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 64 University Mosque - Higher Education - Umm Uthaina",
-      "direction_en": "University of Jordan to Umm Uthaina"
+      "direction_en": "University of Jordan to Umm Uthaina",
+      "shape": [
+        [
+          32.0146,
+          35.872
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.978,
+          35.899
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.966,
+          35.892
+        ],
+        [
+          31.959,
+          35.8792
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     },
     {
       "route_id": "bus_64_back",
@@ -1468,7 +3161,44 @@
       ],
       "source_note": "تمت مراجعة رقم الخط والتعرفة من مصادر باص عمّان/باص رؤية الرسمية؛ الإحداثيات التفصيلية للمحطات والوقت بين المحطات مخصصة للـ MVP بانتظار GTFS رسمي مفتوح.",
       "name_en": "Amman Bus 64 University Mosque - Higher Education - Umm Uthaina",
-      "direction_en": "Umm Uthaina to University of Jordan"
+      "direction_en": "Umm Uthaina to University of Jordan",
+      "shape": [
+        [
+          31.959,
+          35.8792
+        ],
+        [
+          31.966,
+          35.892
+        ],
+        [
+          31.9705,
+          35.9055
+        ],
+        [
+          31.978,
+          35.899
+        ],
+        [
+          31.9867,
+          35.8942
+        ],
+        [
+          31.9993,
+          35.8827
+        ],
+        [
+          32.008,
+          35.879
+        ],
+        [
+          32.0146,
+          35.872
+        ]
+      ],
+      "shape_source": "static_transit_corridor_shape_v2",
+      "geometry_warning_ar": "هذا مسار مرئي محفوظ لخط الباص، وليس أقصر طريق سيارات بين المحطات.",
+      "geometry_warning_en": "Stored visual bus corridor, not a shortest car route between stops."
     }
   ],
   "trips": [
