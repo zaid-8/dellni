@@ -90,8 +90,25 @@
       <div class="route-actions">
         <button id="alertBtn" class="success-btn" type="button" disabled data-i18n="enableAlert">فعّل تنبيه النزول عند 250 متر</button>
       </div>
-      <form id="tripFeedback" class="feedback-card hidden">
-        <h3 data-i18n="rateTrip">قيّم الرحلة بعد ما تخلص</h3>
+    </section>
+
+    <section class="data-section">
+      <details class="data-details glass-panel">
+        <summary data-i18n="dataSummary">مصادر البيانات وحدود الدقة</summary>
+        <p id="datasetWarning"></p>
+        <div id="dataCards" class="data-cards"></div>
+        <ul id="dataSourceList" class="source-list"></ul>
+      </details>
+    </section>
+    <section class="bottom-feedback-section" aria-label="تقييم الرحلة">
+      <form id="tripFeedback" class="feedback-card trip-feedback-bottom hidden">
+        <div class="feedback-title-row">
+          <span class="feedback-icon" aria-hidden="true">⭐</span>
+          <div>
+            <h3 data-i18n="rateTrip">قيّم الرحلة بعد ما تخلص</h3>
+            <small data-i18n="rateTripHint">رأيك بيساعد دلني يحسن الاقتراحات للمستخدمين الجايين.</small>
+          </div>
+        </div>
         <div class="rating-row" role="radiogroup" aria-label="تقييم الرحلة">
           <label><input type="radio" name="rating" value="1"><span>1</span></label>
           <label><input type="radio" name="rating" value="2"><span>2</span></label>
@@ -103,15 +120,6 @@
         <button class="primary-submit" type="submit" data-i18n="sendRating">إرسال التقييم</button>
         <p id="feedbackStatus" class="hint"></p>
       </form>
-    </section>
-
-    <section class="data-section">
-      <details class="data-details glass-panel">
-        <summary data-i18n="dataSummary">مصادر البيانات وحدود الدقة</summary>
-        <p id="datasetWarning"></p>
-        <div id="dataCards" class="data-cards"></div>
-        <ul id="dataSourceList" class="source-list"></ul>
-      </details>
     </section>
   </main>
 

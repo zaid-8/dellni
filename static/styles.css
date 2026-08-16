@@ -782,3 +782,42 @@ body {
 /* Final delivery cleanup: hide duplicate lower area planner and use spinner-only loading. */
 .area-mode-section { display: none !important; }
 body.route-searching #systemStatus { opacity: .78; }
+
+
+/* Bottom trip rating restored for final submission */
+.bottom-feedback-section {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 34px;
+}
+.trip-feedback-bottom {
+  display: block;
+  border: 1px solid rgba(205, 169, 87, 0.28);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,250,241,0.92));
+  box-shadow: 0 18px 45px rgba(44, 30, 79, 0.12);
+}
+.trip-feedback-bottom.hidden { display: none !important; }
+.feedback-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.feedback-title-row h3 { margin: 0 0 3px; }
+.feedback-title-row small { color: var(--muted); }
+.feedback-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  color: var(--ink);
+  box-shadow: 0 12px 28px rgba(205, 169, 87, 0.28);
+}
+@media (max-width: 720px) {
+  .bottom-feedback-section {
+    width: min(100% - 18px, 560px);
+    margin-bottom: 22px;
+  }
+  .trip-feedback-bottom { padding: 16px; }
+}
